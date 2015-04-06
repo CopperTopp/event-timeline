@@ -1,0 +1,216 @@
+{
+  "servicenow_dev": {
+    "instance": "https://my.service-now.qa.com",
+    "username": "joes",
+    "password": "has-a-password"
+  },
+  "servicenow_prod": {
+    "instance": "https://my.service-now.com",
+    "username": "joes",
+    "password": "has-a-password"
+  },
+  "servicenow_query": [
+    "active=true",
+    "^",
+    "u_coordinator_groupSTARTSWITHMy_Team",
+    "^OR",
+    "u_coordinator_groupSTARTSWITHTheir Team with Spaces",
+    "^OR",
+    "u_coordinator_groupLIKETeam - With - Like",
+    "^",
+    "short_descriptionLIKERelease",
+    "^OR",
+    "short_descriptionLIKESoak",
+    "^",
+    "short_descriptionNOT LIKEExecepted Group",
+    "^OR",
+    "short_descriptionNOT LIKENotOnMyTeam",
+    "^",
+    "approval=requested",
+    "^OR",
+    "approval=approved",
+    "^",
+    "start_dateBETWEENjavascript:gs.monthsAgoStart(3)@javascript:gs.monthsAgoEnd(-3)"
+  ],
+  "servicenow_map": {
+    "name":                   "event.short_description",
+    "number":                 "event.number",
+    "status":                 "event.state",
+    "isActive":               "event.active",
+    "approval":               "event.approval",
+    "start_time":             "event.start_date?event.start_date.replace(/-/g,'/'):undefined",
+    "end_time":               "event.end_date?event.end_date.replace(/-/g,'/'):undefined",
+    "actual_start_time":      "event.work_start?event.work_start.replace(/-/g,'/'):undefined",
+    "actual_end_time":        "event.work_end?event.work_end.replace(/-/g,'/'):undefined",
+    "details":                "event.description",
+    "coordinator":            "event.u_coordinator",
+    "coordinator_group":      "event.u_coordinator_group",
+    "implementer":            "event.assigned_to",
+    "type":                   "event.type"
+  },
+  "tooltip_template": [
+    {
+      "name": "Name",
+      "type": "line",
+      "value": "event.name"
+    },
+    {
+      "name": "Schedule",
+      "type": "date_range",
+      "d3_format": "%A %B %e, %Y %I:%M %p",
+      "start": "event.start_time",
+      "end": "event.end_time",
+      "timezone_label": "PDT"
+    },
+    {
+      "name": "Details",
+      "type": "line",
+      "value": "event.details"
+    },
+    {
+      "type": "link",
+      "name": "CRQ",
+      "value": "event.number",
+      "token": "event.number",
+      "href": "https://expedia.service-now.com/go.do?id=#TOKEN#"
+    },
+    {
+      "name": "Approval",
+      "type": "line",
+      "value": "event.approval"
+    },
+    {
+      "name": "Status",
+      "type": "line",
+      "value": "event.status"
+    },
+    {
+      "name": "Implementer",
+      "type": "link",
+      "value": "event.implementer",
+      "token": "event.implementer",
+      "click": "select_person('#TOKEN#')"
+    },
+    {
+      "name": "Coordinator",
+      "type": "link",
+      "value": "event.coordinator",
+      "token": "event.coordinator",
+      "click": "select_person('#TOKEN#')"
+    },
+    {
+      "name": "CoordinatorGroup",
+      "type": "line",
+      "value": "event.coordinator_group"
+    },
+    {
+      "name": "Type",
+      "type": "line",
+      "value": "event.type"
+    }
+  ],
+  "log4js_cm": {
+    "default_level": "INFO",
+    "log_dir": "logs",
+    "appender_templates" : {
+      "file": {
+        "filename": "logs/cache_manager.log",
+        "maxLogSize": 262144,
+        "backups": 10,
+        "pattern": "-yyyy-MM-dd",
+        "alwaysIncludePattern": true,
+        "layout": {
+          "type": "pattern",
+          "pattern": "[%d][%c][%-5p] - %m"
+        }
+      },
+      "console": {
+        "layout": {
+          "type": "pattern",
+          "pattern": "%[[%d][%c][%-5p]%] - %m"
+        }
+      }
+    },
+    "appenders": [
+      {
+        "category": "data_reader",
+        "templates": ["file", "console"]
+      },
+      {
+        "category": "mongoose",
+        "templates": ["file", "console"]
+      },
+      {
+        "category": "product",
+        "templates": ["file", "console"]
+      },
+      {
+        "category": "release",
+        "templates": ["file", "console"]
+      },
+      {
+        "category": "event",
+        "templates": ["file", "console"]
+      },
+      {
+        "category": "code_change",
+        "templates": ["file", "console"]
+      },
+      {
+        "category": "tracer",
+        "templates": ["file", "console"]
+      },
+      {
+        "category": "console",
+        "type": "console",
+        "layout": {
+          "type": "pattern",
+          "pattern": "%[[%d][%c][%-5p]%] - %m"
+        }
+      }
+    ],
+    "replaceConsole": true
+  },
+  "log4js_srv": {
+    "default_level": "INFO",
+    "log_dir": "logs",
+    "appender_templates" : {
+      "file": {
+        "filename": "logs/server.log",
+        "maxLogSize": 262144,
+        "backups": 10,
+        "pattern": "-yyyy-MM-dd",
+        "alwaysIncludePattern": true,
+        "layout": {
+          "type": "pattern",
+          "pattern": "[%d][%c][%-5p] - %m"
+        }
+      },
+      "console": {
+        "layout": {
+          "type": "pattern",
+          "pattern": "%[[%d][%c][%-5p]%] - %m"
+        }
+      }
+    },
+    "appenders": [
+      {
+        "category": "server",
+        "templates": ["file", "console"]
+      },
+      {
+        "category": "mongoose",
+        "templates": ["file", "console"]
+      },
+      {
+        "category": "console",
+        "type": "console",
+        "layout": {
+          "type": "pattern",
+          "pattern": "%[[%d][%c][%-5p]%] - %m"
+        }
+      }
+    ],
+    "replaceConsole": true
+  }
+}

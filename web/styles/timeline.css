@@ -1,0 +1,69 @@
+svg {
+  font: 10px sans-serif;
+  shape-rendering: crispEdges;
+}
+svg.timeline {
+  display: block;
+}
+
+svg.item {
+  cursor: pointer;
+}
+
+button.tt_today {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+rect.tl_background {
+  fill: #ddd;
+}
+
+div.reset-button {
+}
+
+div.tl_tooltip {
+  position: fixed;
+  text-align: center;
+  padding: 5px;
+  font: 10px sans-serif;
+  background: white;
+  border: 1px solid;
+  border-color: black;
+  border-radius: 8px;
+  z-index: 1;
+}
+
+td.tt-col {
+  text-align: left;
+  vertical-align: text-top;
+}
+
+td.tt-col-name {
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.axis path, .axis line {
+  fill: none;
+  stroke: #fff;
+}
+
+.tag {
+  fill: blue;
+}
+
+.tag.selected_person {
+  fill: green;
+}
+
+.bar {
+  fill: yellow;
+  stroke: blue;
+}
+
+.bar.selected_person {
+  fill: lightgreen;
+  stroke: green;
+}

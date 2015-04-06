@@ -1,0 +1,24 @@
+h2 select {
+  position: relative;
+  top: 3px;
+  font-size: 24pt;
+  font-weight: bold;
+  height: auto;
+  padding: 0;
+}
+
+table thead {
+  font-weight: bold;
+}
+
+tr.timeline-visible {
+  font-weight: bold;
+}
+
+ul.count_detail {
+  display: inline;
+}
+ul.count_detail li {
+  list-style: none;
+  display: inline;
+}

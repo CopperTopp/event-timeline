@@ -1,0 +1,22 @@
+{
+  "name": "ewe_relcal",
+  "version": "1.0.0",
+  "description": "EWE Release Calendar",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://ewegithub.sb.karmalab.net/a-mivanhoff/ewe_relcal.git"
+  },
+  "author": "Michael Van Hoff",
+  "license": "ISC",
+  "dependencies": {
+    "crypto-js": "^3.1.4",
+    "express": "^4.12.2",
+    "log4js": "^0.6.22",
+    "servicenow": "^0.5.0",
+    "string": "^3.0.0"
+  }
+}

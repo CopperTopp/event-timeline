@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html ng-app="relcalApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Event Timeline - Home</title>
+    <base href="/">
+      
+    <!-- Stylesheets -->
+    <!--
+    <link rel="stylesheet" type="text/css" href="styles/bootstrap.min.css">
+    -->
+    <link rel="stylesheet" type="text/css" href="styles/timeline.css">
+    <link rel="stylesheet" type="text/css" href="styles/app.css">
+      
+    <!-- Vendor Scripts -->
+    <script type='text/javascript' src="scripts/jquery-2.1.3.js"></script>
+    <!-- ToDo: Use min.js in Production
+    <script type='text/javascript' src="scripts/jquery-2.1.3.min.js"></script>
+    -->
+    <script type='text/javascript' src="scripts/angular.js"></script>
+    <!-- ToDo: Use min.js in Production
+    <script type='text/javascript' src="scripts/angular.min.js"></script>
+    -->
+    <script type="text/javascript" src="scripts/d3.v3.5.5.js" charset="utf-8"></script>
+    <!-- ToDo: Use min.js in Production
+    <script type="text/javascript" src="scripts/d3.v3.5.5.min.js" charset="utf-8"></script>
+    -->
+    <script type="text/javascript" src="scripts/md5.js"></script>
+    
+    <!-- Custom Scripts -->
+    <script type='text/javascript' src="scripts/rest_paths.js"></script>
+    <script type='text/javascript' src="scripts/today.js"></script>
+  </head>
+  <body>
+    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="services/tooltip.js"></script>
+    <script type="text/javascript" src="services/visible.js"></script>
+    <script type="text/javascript" src="directives/timeline.js"></script>
+    <header>
+      <h1>Event Timeline</h1>
+    </header>
+    <section>
+      <div ng-controller="TimelineController">
+        <script>
+          function select_person(name) {
+            var md5 = CryptoJS.MD5(name)
+            console.log(name + "::" + md5);
+            //d3.selectAll(".bar." + md5)
+            d3.selectAll(".item, .tag, .bar")
+              .classed("selected_person", false);
+            d3.selectAll(".m" + md5)
+              //.each(function(d){ console.log(d); })
+              .classed("selected_person", true);
+              //.attr("stroke", "green")
+              //.style("fill", "lightgreen");
+          };
+        </script>
+        <timeline-chart events='events' domain='timeline_domain'></timeline-chart>
+      </div>
+    </section>
+  </body>
+</html>
